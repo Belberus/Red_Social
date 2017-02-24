@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <title>AP Social</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+        <script src="app.js"></script>
+        <script src="http://cdnjs.cloudfare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script>
+    </head>
+
+    <body ng-app="APSocial">
+        <div class="row">
+            <div class="col-md-6" style="margin-left:10px;">
+                <ui-view></ui-view>
+            </div>
+        </div>
+        
+        <script type="text/ng-template" id="/community.html">
+            <div class="page-header">
+                <h1>Community 1</h1>
+            </div>
+
+            <div ng-repeat="post in posts | orderBy: '-views'">
+                <span style="font-size:20px; margin-left:10px;">
+                    <a ng-show="post.link" href="{{post.link}}">
+                        {{post.title}}
+                    </a>
+                    <span ng-hide="post.link">
+                        {{post.title}}
+                    </span>
+                </span>
+                <div style="margin-left:15px;">
+                    <span class="glyphicon glyphicon-eye-open" ng-click="incrementViews(post)"></span>
+                    {{post.views}}
+                    <span class="glyphicon glyphicon-comment" style="margin-left:10px;"></span>
+                    5
+                </div>
+            </div>
+
+            <hr />
+            <form ng-submit="addPost()" style="margin-top:15px;">
+                <h3>Crea tu post!</h3>
+
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Title"
+                           ng-model="title"></input>
+                </div>
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Link"
+                           ng-model="link"></input>
+                </div>
+                <button type="submit" class="btn btn-primary">Post</button>
+            </form>
+        </script>
+
+        <script type="text/ng-template" id="/posts.html">
+            <div class="page-header">
+                <h3>
+                    <a ng-show="post.link" href="{{post.link}}">
+                        {{post.title}}
+                    </a>
+                    <span ng-hide="post.link">
+                        {{post.title}}
+                    </span>
+                </h3>
+            </div>
+
+            <div ng-repeat="comment in post.comments | orederBy:'-date'">
+                <span class="glyphicon glyphicon-eye-open"
+                 ng-click="incrementViews(comment)"></span>
+                {{comment.views}} - by {{comment.author}}
+                <span style="font-size:20px; margin-left:10px;">
+                    {{comment.body}}
+                </span>
+            </div>
+        </script>
+
+
+    </body>
+    <html>
+
