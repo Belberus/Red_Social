@@ -7,19 +7,21 @@ app.config([
 
             $stateProvider
                 .state('community', {
+                    id: 'community',
                     url: '/community/',
-                    templateUrl: '/community.html',
+                    templateUrl: 'community.html',
                     controller: 'MainCtrl'
+                })
+
+                .state('posts', {
+                    id: 'posts',
+                    url: '/posts/{id}',
+                    templateUrl: 'posts.html',
+                    controller: 'PostsCtrl'
                 });
 
-            .state('posts', {
-                url: '/posts/{id}',
-                templateUrl: '/posts.html',
-                controller: 'PostsCtrl'
-            });
 
-
-            $urlRouterProvider.otherwise('home');
+            $urlRouterProvider.otherwise('community');
         }]);
 
 app.factory('posts',[function(){
@@ -36,7 +38,19 @@ app.controller('PostsCtrl', [
         'posts',
         function($scope, $stateParams, posts){
             $scope.post = posts.posts[$stateParams.id];
+
+            $scope.addComment = function(){
+                if($scope.body === '') {return; }
+                $scope.post.comments.push({
+                    body: $scope.body,
+                    author: 'user',
+                    date: 0,
+                    views: 0
+                });
+                $scope.body = '';
+            };
         }]);
+
 
 
 app.controller('MainCtrl', [
@@ -50,10 +64,10 @@ app.controller('MainCtrl', [
                 $scope.posts.push({
                     title: $scope.title,
                     link: $scope.link,
-                    views: 0
+                    views: 0,
                     comments: [
-                        {author: 'Pablo', body: 'Post de prueba 1', date: '1'},
-                        {author: 'Alberto', body: 'Post de prueba 2', date. '2'}
+                        {author: 'Pablo', body: 'Post de prueba 1', date: '1', views: '0'},
+                        {author: 'Alberto', body: 'Post de prueba 2', date: '2', views: '0'}
                     ]
                 });
                 $scope.title = '';
