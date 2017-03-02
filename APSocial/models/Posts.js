@@ -7,4 +7,9 @@ var PostSchema = new mongoose.Schema({
     comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
 });
 
+PostSchema.methods.addview = function(cb) {
+    this.views += 1;
+    this.save(cb);
+};
+
 mongoose.model('Post', PostSchema);
