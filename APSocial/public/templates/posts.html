@@ -12,13 +12,13 @@
 <div ng-repeat="comment in post.comments | orderBy:'-date':true">
     <span class="glyphicon glyphicon-thumbs-up"
           ng-click="upvote(comment)"></span>
-    {{comment.upvotes}} - by {{comment.author}}
+    {{comment.upvotes}} - by {{comment.author}} - on {{comment.date}}
     <span style="font-size:20px; margin-left:10px;">
         {{comment.body}}
     </span>
 </div>
 
-<form ng-submit="addComment()" style="margin-top:30px;">
+<form ng-submit="addComment()" ng-show="isLoggedIn()" style="margin-top:30px;">
     <h3>Add a new comment</h3>
 
     <div class="form-group">
@@ -29,3 +29,7 @@
     </div>
     <button type="submit" class="btn btn-primary">Post</button>
 </form>
+
+<div ng-hide="isLoggedIn()">
+    <h3> Necesitas <a href="/#/login">loguearte</a> o <a href="/#/register"> registrarte </a> para comentar.</h3>
+</div>

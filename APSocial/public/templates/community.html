@@ -18,12 +18,14 @@
         <span class="glyphicon glyphicon-eye-open"></span>
         {{post.views}}
         <span class="glyphicon glyphicon-comment"  style="margin-left:10px;"></span>
-        5
+        {{post.numcoments}} 
+        <span class="glyphicon glyphicon-user" ng-show="post.author" style="margin-left:10px;"></span> 
+            By <a>{{post.author}}</a> |
     </div>
 </div>
 
 <hr />
-<form ng-submit="addPost()" style="margin-top:15px;">
+<form ng-submit="addPost()" ng-show="isLoggedIn()" style="margin-top:15px;">
     <h3>Crea tu post!</h3>
 
     <div class="form-group">
@@ -40,3 +42,6 @@
     </div>
     <button type="submit" class="btn btn-primary">Post</button>
 </form>
+<div ng-hide="isLoggedIn()">
+    <h3>Necesitas <a href="/#/login">loguearte</a> o <a hred="/#/register">registrarte</a> antes de crear un post.</h3>
+</div>
