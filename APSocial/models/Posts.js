@@ -4,10 +4,10 @@ var PostSchema = new mongoose.Schema({
     title: String,
     author: String,
     link: String,
-    numcoments: {type: Number, default: 0},
     views: {type: Number, default: 0},
-    comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
+    comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}] 
 });
+
 
 PostSchema.methods.addview = function(cb) {
     this.views += 1;

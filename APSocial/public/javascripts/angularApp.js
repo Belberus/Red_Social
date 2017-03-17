@@ -13,42 +13,42 @@ app.config([
                         postPromise: ['posts', function(posts){
                             return posts.getAll();
                         }]
-                    
+
                     }
                 })
 
-                .state('login', {
-                    url: '/login',
-                    templateUrl: '/templates/login.html',
-                    controller: 'AuthCtrl',
-                    onEnter: ['$state', 'auth', function($state, auth){
-                        if(auth.isLoggedIn()){
-                            $state.go('community');
-                        }
-                    }]
-                })
-
-                .state('register', {
-                    url: '/register',
-                    templateUrl: '/templates/register.html',
-                    controller: 'AuthCtrl',
-                    onEnter: ['$state', 'auth', function($state, auth){
-                        if(auth.isLoggedIn()){
-                            $state.go('community');
-                        }
-                    }]
-                })
-
-                .state('posts', {
-                    url: '/posts/{id}',
-                    templateUrl: '/templates/posts.html',
-                    controller: 'PostsCtrl',
-                    resolve: {
-                        post: ['$stateParams', 'posts', function($stateParams, posts) {
-                            return posts.get($stateParams.id);
-                        }]
+            .state('login', {
+                url: '/login',
+                templateUrl: '/templates/login.html',
+                controller: 'AuthCtrl',
+                onEnter: ['$state', 'auth', function($state, auth){
+                    if(auth.isLoggedIn()){
+                        $state.go('community');
                     }
-                });
+                }]
+            })
+
+            .state('register', {
+                url: '/register',
+                templateUrl: '/templates/register.html',
+                controller: 'AuthCtrl',
+                onEnter: ['$state', 'auth', function($state, auth){
+                    if(auth.isLoggedIn()){
+                        $state.go('community');
+                    }
+                }]
+            })
+
+            .state('posts', {
+                url: '/posts/{id}',
+                templateUrl: '/templates/posts.html',
+                controller: 'PostsCtrl',
+                resolve: {
+                    post: ['$stateParams', 'posts', function($stateParams, posts) {
+                        return posts.get($stateParams.id);
+                    }]
+                }
+            });
 
             $urlRouterProvider.otherwise('community');
         }]);
@@ -84,6 +84,14 @@ app.factory('posts',['$http','auth', function($http,auth){
         });
     };
 
+    o.deletePost = function(post) {
+        return $http.delete('/posts/' + post._id, {
+            headers: {Authorization: 'Bearer '+auth.getToken()}
+        }).success(function() {
+            o.posts.splice(o.posts.indexOf(post),1);
+        });
+    }; 
+
     o.addComment = function(id, comment) {
         return $http.post('/posts/'+ id + '/comments', comment, {
             headers: {Authorization: 'Bearer '+auth.getToken()}
@@ -94,8 +102,21 @@ app.factory('posts',['$http','auth', function($http,auth){
         return $http.put('/posts/' + post._id + '/comments/' + comment._id + '/upvote', null, {
             headers: {Authorization: 'Bearer '+auth.getToken()}
         }).success(function(data){
-                comment.upvotes += 1;
-            });
+            comment.upvotes += 1;
+        });
+    };
+
+    o.deleteComment = function(post, comment) {
+        return $http.delete('/posts/' + post._id + '/comments/' + comment._id, {
+            headers: {Authorization: 'Bearer '+auth.getToken()}
+        });
+    };
+
+    o.getCommentDate = function(id) {
+        var q = id.toString().substring(0,8);
+        var t = new Date( parseInt(q, 16) * 1000);
+        return t.getFullYear()+"-"+(t.getMonth()+1)+"-"+t.getDate() + " "+ t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();
+
     };
 
     return o;
@@ -103,13 +124,13 @@ app.factory('posts',['$http','auth', function($http,auth){
 
 app.factory('auth',['$http','$window', function($http, $window){
     var auth = {};
-    
+
     auth.saveToken = function(token){
         $window.localStorage['AP-token'] = token;
     };
 
     auth.getToken = function(){
-    return $window.localStorage['AP-token'];
+        return $window.localStorage['AP-token'];
     };
 
     auth.isLoggedIn = function(){
@@ -149,6 +170,13 @@ app.factory('auth',['$http','$window', function($http, $window){
         $window.localStorage.removeItem('AP-token');
     };
 
+    auth.isSameUser = function(post) {
+        if(auth.isLoggedIn()){
+                return auth.currentUser() === post.author;
+            }
+            else{return false;}
+        };
+
     return auth;
 }]);
 
@@ -160,6 +188,8 @@ app.controller('PostsCtrl', [
         function($scope, posts, post, auth){
             $scope.post = post;
             $scope.isLoggedIn = auth.isLoggedIn;
+            $scope.isSameUser = auth.isSameUser;
+            $scope.getDate = posts.getCommentDate;
 
             $scope.addComment = function(){
                 if($scope.body === '') { return; }
@@ -173,7 +203,11 @@ app.controller('PostsCtrl', [
             };
 
             $scope.upvote = function(comment){
-              posts.upvoteComment(post, comment); 
+                posts.upvoteComment(post, comment); 
+            };
+
+            $scope.deleteComment = function(post, comment){
+                posts.deleteComment(post, comment);
             };
         }]);
 
@@ -186,6 +220,7 @@ app.controller('MainCtrl', [
         function($scope, posts, auth){
             $scope.posts = posts.posts;
             $scope.isLoggedIn = auth.isLoggedIn;
+            $scope.isSameUser = auth.isSameUser;
 
             $scope.addPost = function() {
                 if(!$scope.title || $scope.title === '') {return;}
@@ -201,6 +236,10 @@ app.controller('MainCtrl', [
             $scope.incrementViews = function(post) {
                 posts.addview(post);
             };
+
+            $scope.deletePost = function(post) {
+                posts.deletePost(post);
+            }; 
         }]);
 
 app.controller('AuthCtrl', [

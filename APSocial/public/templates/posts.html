@@ -10,12 +10,13 @@
 </div>
 
 <div ng-repeat="comment in post.comments | orderBy:'-date':true">
-    <span class="glyphicon glyphicon-thumbs-up"
-          ng-click="upvote(comment)"></span>
-    {{comment.upvotes}} - by {{comment.author}} - on {{comment.date}}
     <span style="font-size:20px; margin-left:10px;">
         {{comment.body}}
     </span>
+    <span class="glyphicon glyphicon-thumbs-up"
+          ng-click="upvote(comment)"></span>
+    {{comment.upvotes}} - by {{comment.author}} - on {{getDate(comment._id)}}
+    <span class="glyphicon glyphicon-trash" ng-show="isSameUser(post)" ng-click="deleteComment(post, comment)" style="margin-left:10px;"></span>
 </div>
 
 <form ng-submit="addComment()" ng-show="isLoggedIn()" style="margin-top:30px;">

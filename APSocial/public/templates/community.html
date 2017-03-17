@@ -18,9 +18,10 @@
         <span class="glyphicon glyphicon-eye-open"></span>
         {{post.views}}
         <span class="glyphicon glyphicon-comment"  style="margin-left:10px;"></span>
-        {{post.numcoments}} 
+        {{post.comments.length}} 
         <span class="glyphicon glyphicon-user" ng-show="post.author" style="margin-left:10px;"></span> 
-            By <a>{{post.author}}</a> |
+            By <a>{{post.author}}</a>
+        <span class="glyphicon glyphicon-trash" ng-show="isSameUser(post)" ng-click="deletePost(post)" style="margin-left:10px;"></span>
     </div>
 </div>
 
