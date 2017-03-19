@@ -1,33 +1,33 @@
 0 info it worked if it ends with ok
 1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'start' ]
-2 info using npm@4.1.2
-3 info using node@v7.7.3
+2 info using npm@3.5.2
+3 info using node@v4.2.6
 4 verbose run-script [ 'prestart', 'start', 'poststart' ]
 5 info lifecycle apsocial@0.0.0~prestart: apsocial@0.0.0
 6 silly lifecycle apsocial@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle apsocial@0.0.0~start: apsocial@0.0.0
 8 verbose lifecycle apsocial@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle apsocial@0.0.0~start: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/cold/GitHub/Red_Social/APSocial/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/cold/bin/gradle-2.12/bin
-10 verbose lifecycle apsocial@0.0.0~start: CWD: /home/cold/GitHub/Red_Social/APSocial
+9 verbose lifecycle apsocial@0.0.0~start: PATH: /usr/share/npm/bin/node-gyp-bin:/home/belbus/GitHub/arqSoftware/Red_Social/APSocial/node_modules/.bin:/home/belbus/bin:/home/belbus/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
+10 verbose lifecycle apsocial@0.0.0~start: CWD: /home/belbus/GitHub/arqSoftware/Red_Social/APSocial
 11 silly lifecycle apsocial@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle apsocial@0.0.0~start: Returned: code: 1  signal: null
 13 info lifecycle apsocial@0.0.0~start: Failed to exec start script
 14 verbose stack Error: apsocial@0.0.0 start: `node ./bin/www`
 14 verbose stack Exit status 1
-14 verbose stack     at EventEmitter.<anonymous> (/usr/lib/node_modules/npm/lib/utils/lifecycle.js:279:16)
-14 verbose stack     at emitTwo (events.js:106:13)
-14 verbose stack     at EventEmitter.emit (events.js:194:7)
-14 verbose stack     at ChildProcess.<anonymous> (/usr/lib/node_modules/npm/lib/utils/spawn.js:40:14)
-14 verbose stack     at emitTwo (events.js:106:13)
-14 verbose stack     at ChildProcess.emit (events.js:194:7)
-14 verbose stack     at maybeClose (internal/child_process.js:899:16)
-14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+14 verbose stack     at EventEmitter.<anonymous> (/usr/share/npm/lib/utils/lifecycle.js:232:16)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at EventEmitter.emit (events.js:172:7)
+14 verbose stack     at ChildProcess.<anonymous> (/usr/share/npm/lib/utils/spawn.js:24:14)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at ChildProcess.emit (events.js:172:7)
+14 verbose stack     at maybeClose (internal/child_process.js:821:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
 15 verbose pkgid apsocial@0.0.0
-16 verbose cwd /home/cold/GitHub/Red_Social/APSocial
-17 error Linux 4.4.0-66-generic
+16 verbose cwd /home/belbus/GitHub/arqSoftware/Red_Social/APSocial
+17 error Linux 4.4.0-64-generic
 18 error argv "/usr/bin/nodejs" "/usr/bin/npm" "start"
-19 error node v7.7.3
-20 error npm  v4.1.2
+19 error node v4.2.6
+20 error npm  v3.5.2
 21 error code ELIFECYCLE
 22 error apsocial@0.0.0 start: `node ./bin/www`
 22 error Exit status 1

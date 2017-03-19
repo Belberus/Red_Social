@@ -1,48 +1,96 @@
-<div class="page-header">
-    <h1>Community 1</h1>
-</div>
-
-<div ng-repeat="post in posts | orderBy: '-views'">
-    <span style="font-size:20px; margin-left:10px;">
-        <a ng-show="post.link" ng-click="incrementViews(post)" href="{{post.link}}">
-            {{post.title}}
-        </a>
-        <span ng-hide="post.link">
-            {{post.title}}
-        </span>
-        <span ng-click="incrementViews(post)">
-            <a href="#/posts/{{post._id}}">Comments</a>
-        </span>
-    </span>
-    <div style="margin-left:15px;">
-        <span class="glyphicon glyphicon-eye-open"></span>
-        {{post.views}}
-        <span class="glyphicon glyphicon-comment"  style="margin-left:10px;"></span>
-        {{post.comments.length}} 
-        <span class="glyphicon glyphicon-user" ng-show="post.author" style="margin-left:10px;"></span> 
-            By <a>{{post.author}}</a>
-        <span class="glyphicon glyphicon-trash" ng-show="isSameUser(post)" ng-click="deletePost(post)" style="margin-left:10px;"></span>
+<head>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/style.css ">
+</head>
+<body>
+    <div class="page-header">
+        <h1>Community 1 (Temporal)</h1>
     </div>
-</div>
 
-<hr />
-<form ng-submit="addPost()" ng-show="isLoggedIn()" style="margin-top:15px;">
-    <h3>Crea tu post!</h3>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Posts:</h2>
+                </div>
+                <div class="col-md-6">
+                    <button ng-show="isLoggedIn()" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary btn-lg pull-right">Add Post</button>
+                </div>
+            </div>
 
-    <div class="form-group">
-        <input type="text"
-               class="form-control"
-               placeholder="Title"
-               ng-model="title"></input>
+            <div ng-repeat="post in posts | orderBy: '-views'">
+                <span style="font-size:20px; margin-left:10px;">
+                    <a ng-show="post.link" ng-click="incrementViews(post)" href="{{post.link}}">
+                        {{post.title}}
+                    </a>
+                    <span ng-hide="post.link">
+                        {{post.title}}
+                    </span>
+                    <span ng-click="incrementViews(post)">
+                        <a href="#/posts/{{post._id}}">Comments</a>
+                    </span>
+                </span>
+                <div style="margin-left:15px;">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                    {{post.views}}
+                    <span class="glyphicon glyphicon-comment"  style="margin-left:10px;"></span>
+                    {{post.comments.length}}
+                    <span class="glyphicon glyphicon-user" ng-show="post.author" style="margin-left:10px;"></span>
+                        By <a>{{post.author}}</a>
+                    <span class="glyphicon glyphicon-trash" ng-show="isSameUser(post)" ng-click="deletePost(post)" style="margin-left:10px;"></span>
+                </div>
+            </div>
+
+            <hr />
+
+            <!-- MODAL TODO
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Some text in the modal.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            -->
+
+            <form ng-submit="addPost()" ng-show="isLoggedIn()" style="margin-top:15px;">
+                <h3>Crea tu post!</h3>
+
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Title"
+                           ng-model="title"/>
+                </div>
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Link"
+                           ng-model="link"/>
+                </div>
+                <div class="form-group">
+                    <textarea type="text"
+                           class="form-control"
+                           placeholder="Content"
+                           ng-model="content"
+                           rows="10"
+                           style="resize: none;">
+                    </textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Post</button>
+            </form>
+            <div ng-hide="isLoggedIn()">
+                <h3>Necesitas <a href="/#/login">loguearte</a> o <a hred="/#/register">registrarte</a> antes de crear un post.</h3>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <input type="text"
-               class="form-control"
-               placeholder="Link"
-               ng-model="link"></input>
-    </div>
-    <button type="submit" class="btn btn-primary">Post</button>
-</form>
-<div ng-hide="isLoggedIn()">
-    <h3>Necesitas <a href="/#/login">loguearte</a> o <a hred="/#/register">registrarte</a> antes de crear un post.</h3>
-</div>
+</body>

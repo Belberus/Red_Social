@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>AP Social</title>
+        <title>Gammit</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
@@ -9,14 +9,28 @@
     </head>
 
     <body ng-app="APSocial">
-
-      <nav class="navbar navbar-default pull-right" ng-controller="NavCtrl">
-        <ul class="nav navbar-nav">
-          <li ng-show="isLoggedIn()"><a>{{ currentUser() }}</a></li>
-          <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
-          <li ng-hide="isLoggedIn()"><a href="/#/login">Log In</a></li>
-          <li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
-        </ul>
+      <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavCtrl">
+          <div class="container-fluid">
+              <div class="navbar-header">
+                  <a style="font-size: 35px;" class="navbar-brand" href="#">Gammit</a>
+              </div>
+              <ul class="nav navbar-nav pull-left">
+                  <li><a href="#"><span class="glyphicon glyphicon-th"></span> Explore</a></li>
+              </ul>
+              <form class="navbar-form navbar-left">
+                  <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Search">
+                  </div>
+                  <button style="font-size: 20px;" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+              </form>
+              <ul class="nav navbar-nav pull-right">
+                  <li ng-show="isLoggedIn()"><a><span class="glyphicon glyphicon-user"></span> {{ currentUser() }}</a></li>
+                  <li ng-show="isLoggedIn()"><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
+                  <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                  <li ng-hide="isLoggedIn()"><a href="/#/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+                  <li ng-hide="isLoggedIn()"><a href="/#/register"><span class="glyphicon glyphicon-pencil"></span> Register</a></li>
+              </ul>
+          </div>
       </nav>
 
       <div class="row">
@@ -26,4 +40,3 @@
       </div>
     </body>
 <html>
-
