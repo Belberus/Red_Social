@@ -2,40 +2,61 @@
     <link rel="stylesheet" type="text/css" href="../stylesheets/style.css ">
 </head>
 <body>
-    <div class="page-header">
-        <h3>
-            <a ng-show="post.link" href="{{post.link}}">
-                {{post.title}}
-            </a>
-            <span ng-hide="post.link">
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="page-header" style="margin-top: -15px;">
+            <h3>
+                <a ng-show="post.link" href="{{post.link}}">
+                    {{post.title}}
+                </a>
+                <span ng-hide="post.link">
                 {{post.title}}
             </span>
-        </h3>
-    </div>
+            </h3>
 
-    <div ng-repeat="comment in post.comments | orderBy:'-date':true">
+        </div>
+        <p> Contenido del post, pendiente de ser añadido.</p>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div style="margin-top: -25px; margin-bottom: 25px;">
+            <h2>Comments:</h2>
+        </div>
+        <div ng-repeat="comment in post.comments | orderBy:'-date':true">
+            <div class="panel panel-default">
+                <div class="panel-body">
         <span style="font-size:20px; margin-left:10px;">
             {{comment.body}}
         </span>
-        <span class="glyphicon glyphicon-thumbs-up"
-              ng-click="upvote(comment)"></span>
-        {{comment.upvotes}} - by {{comment.author}} - on {{getDate(comment._id)}}
-        <span class="glyphicon glyphicon-trash" ng-show="isSameUser(post)" ng-click="deleteComment(post, comment)" style="margin-left:10px;"></span>
-    </div>
-
-    <form ng-submit="addComment()" ng-show="isLoggedIn()" style="margin-top:30px;">
-        <h3>Add a new comment</h3>
-
-        <div class="form-group">
-            <input type="text"
-                   class="form-control"
-                   placeholder="Comment"
-                   ng-model="body"></input>
+            <span class="glyphicon glyphicon-thumbs-up"
+                  ng-click="upvote(comment)"></span>
+            {{comment.upvotes}} - by {{comment.author}} - on {{getDate(comment._id)}}
+            <span class="glyphicon glyphicon-trash" ng-show="isSameUser(post)" ng-click="deleteComment(post, comment)" style="margin-left:10px;"></span>
+           </div>
+                </div>
         </div>
-        <button type="submit" class="btn btn-primary">Post</button>
-    </form>
-
-    <div ng-hide="isLoggedIn()">
-        <h3> Necesitas <a href="/#/login">loguearte</a> o <a href="/#/register"> registrarte </a> para comentar.</h3>
     </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form ng-submit="addComment()" ng-show="isLoggedIn()">
+            <div style="margin-top: -25px; margin-bottom: 25px;">
+                <h2>Add a new comment!</h2>
+            </div>
+
+            <div class="form-group">
+                <input type="text"
+                       class="form-control"
+                       placeholder="Comment"
+                       ng-model="body"></input>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">Post</button>
+        </form>
+
+        <div ng-hide="isLoggedIn()">
+            <h3> Necesitas <a href="/#/login">loguearte</a> o <a href="/#/register"> registrarte </a> para comentar.</h3>
+        </div>
+    </div>
+</div>
 </body>

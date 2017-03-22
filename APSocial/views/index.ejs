@@ -26,7 +26,7 @@
               <ul class="nav navbar-nav pull-left">
                   <li ng-show="isLoggedIn()"><a style="font-size:20px;" href="#"><span class="glyphicon glyphicon-heart"></span> Subscriptions</a></li>
               </ul>
-              <ul class="nav navbar-nav pull-right">
+              <ul style="margin-right: 275px;" class="nav navbar-nav pull-right">
                   <li ng-show="isLoggedIn()"><a><span class="glyphicon glyphicon-user"></span> {{ currentUser() }}</a></li>
                   <li ng-show="isLoggedIn()"><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
                   <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
