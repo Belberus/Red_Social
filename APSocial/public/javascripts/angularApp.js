@@ -109,6 +109,8 @@ app.factory('posts',['$http','auth', function($http,auth){
     o.deleteComment = function(post, comment) {
         return $http.delete('/posts/' + post._id + '/comments/' + comment._id, {
             headers: {Authorization: 'Bearer '+auth.getToken()}
+        }).success(function() {
+            post.comments.splice(post.comments.indexOf(comment),1);
         });
     };
 
@@ -207,6 +209,7 @@ app.controller('PostsCtrl', [
             };
 
             $scope.deleteComment = function(post, comment){
+
                 posts.deleteComment(post, comment);
             };
         }]);
@@ -227,10 +230,12 @@ app.controller('MainCtrl', [
                 posts.create({
                     title: $scope.title,
                     link: $scope.link,
+                    content: $scope.content,
                     author: auth.currentUser,
                 });
                 $scope.title = '';
                 $scope.link = '';
+                $scope.content= '';
             };
 
             $scope.incrementViews = function(post) {
