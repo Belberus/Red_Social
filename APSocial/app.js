@@ -11,7 +11,7 @@ mongoose.connect('mongodb://localhost/news');
 
 require('./models/Posts');
 require('./models/Comments');
-
+require('./models/Communities');
 //Passport
 var passport = require('passport');
 require('./models/Users');

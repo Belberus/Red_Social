@@ -9,3 +9,14 @@ body {
 a {
     color: #00B7FF;
 }
+
+.panel_juegos > .panel-body {
+    padding: 0px;
+}
+.panel_juegos > .panel-body > img {
+    width: 100%;
+    height: 100%;
+}
+.panel_juegos > .panel-footer {
+    text-align: center;
+}

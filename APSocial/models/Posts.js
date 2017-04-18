@@ -6,7 +6,8 @@ var PostSchema = new mongoose.Schema({
     link: String,
     content: String,
     views: {type: Number, default: 0},
-    comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}] 
+    comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}],
+    community: {type: mongoose.Schema.Types.ObjectId, ref: 'Community'} 
 });
 
 

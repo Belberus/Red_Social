@@ -1,12 +1,23 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var Community = mongoose.model('Community');
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 var passport = require('passport');
 var User = mongoose.model('User');
 var jwt = require('express-jwt');
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
+
+
+router.get('/home', function(req, res, next) {
+    Community.find(function(err,communities){
+        if(err){ return next(err);}
+
+        res.json(communities);
+    });
+});
+
 
 router.get('/posts', function(req, res, next) {
     Post.find(function(err, posts){
