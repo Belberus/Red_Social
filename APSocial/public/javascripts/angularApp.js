@@ -8,11 +8,11 @@ angular.module('APSocial',['ui.router']).config([
                 url: '/home',
                 templateUrl: '/templates/home.html',
                 controller: 'HomeCtrl',
-                //resolve: {
-                //    communities: ['communities', function(communities){
-                //        return communities.getAll();
-                //    }]
-                //}
+                resolve: {
+                   coms: ['communities', function(communities){
+                        return communities.getAll();
+                    }]
+                }
             })
 
 

@@ -8,5 +8,6 @@ angular.module('APSocial').factory('communities', ['$http',function($http){
             angular.copy(data, c.communities);
         });
     };
-
+    
+    return c;
 }]);

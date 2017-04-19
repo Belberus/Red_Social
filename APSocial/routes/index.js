@@ -9,7 +9,7 @@ var User = mongoose.model('User');
 var jwt = require('express-jwt');
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 
-
+//TODO: Incluir en todas las rutas de posts el nombre de la comunidad antes.
 router.get('/home', function(req, res, next) {
     Community.find(function(err,communities){
         if(err){ return next(err);}
@@ -18,6 +18,17 @@ router.get('/home', function(req, res, next) {
     });
 });
 
+router.post('/home', function(req, res, next) {
+    var com = new Community(req.body);
+    com.name= req.query.name;
+    com.subs= 0;
+    com.image = req.query.image;
+    com.save(function(err, post){
+        if(err){return next(err);}
+
+        res.json(com);
+    });
+});
 
 router.get('/posts', function(req, res, next) {
     Post.find(function(err, posts){
