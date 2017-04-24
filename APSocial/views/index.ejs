@@ -17,10 +17,10 @@
     </head>
 
     <body ng-app="APSocial">
-      <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavCtrl">
+      <nav class="navbar navbar navbar-fixed-top" ng-controller="NavCtrl" style="background-image: url('http://wallpapercave.com/wp/UyNOzwq.jpg');">
           <div class="container-fluid">
-              <div style="margin-left: 250px;"class="navbar-header">
-                  <a style="margin-top: -10px; font-size: 35px;" class="navbar-brand" href="#"><span class = "glyphicon glyphicon-tower"></span>Gammit</a>
+              <div style="margin-left: 250px; margin-right: 250;"class="navbar-header">
+                  <a style="margin-top: -10px; font-size: 35px; color: #FFFFFF;" class="navbar-brand" href="#"><span class = "glyphicon glyphicon-tower"></span>Gammit</a>
               </div>
               <form class="navbar-form navbar-left">
                   <div class="form-group">
@@ -29,17 +29,17 @@
                   <button style="font-size: 20px;" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
               </form>
               <ul class="nav navbar-nav pull-left">
-                  <li><a style="font-size:20px;" href="#"><span class="glyphicon glyphicon-th"></span> Explore</a></li>
+                  <li><a style="font-size:20px; color: #FFFFFF;" href="#"><span class="glyphicon glyphicon-th"></span> Explore</a></li>
               </ul>
               <ul class="nav navbar-nav pull-left">
-                  <li ng-show="isLoggedIn()"><a style="font-size:20px;" href="#"><span class="glyphicon glyphicon-heart"></span> Subscriptions</a></li>
+                  <li ng-show="isLoggedIn()"><a style="font-size:20px; color: #FFFFFF;" href="#"><span class="glyphicon glyphicon-heart"></span> Subscriptions</a></li>
               </ul>
-              <ul style="margin-right: 275px;" class="nav navbar-nav pull-right">
-                  <li ng-show="isLoggedIn()"><a><span class="glyphicon glyphicon-user"></span> {{ currentUser() }}</a></li>
-                  <li ng-show="isLoggedIn()"><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
-                  <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
-                  <li ng-hide="isLoggedIn()"><a href="/#/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
-                  <li ng-hide="isLoggedIn()"><a href="/#/register"><span class="glyphicon glyphicon-pencil"></span> Register</a></li>
+              <ul style="margin-right: 250px;" class="nav navbar-nav pull-right">
+                  <li ng-show="isLoggedIn()"><a style="color: #FFFFFF;"><span class="glyphicon glyphicon-user"></span> {{ currentUser() }}</a></li>
+                  <li ng-show="isLoggedIn()"><a style="color: #FFFFFF;" href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
+                  <li ng-show="isLoggedIn()"><a style="color: #FFFFFF;" href="" ng-click="logOut()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                  <li ng-hide="isLoggedIn()"><a style="color: #FFFFFF;" href="/#/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+                  <li ng-hide="isLoggedIn()"><a style="color: #FFFFFF;" href="/#/register"><span class="glyphicon glyphicon-pencil"></span> Register</a></li>
               </ul>
           </div>
       </nav>

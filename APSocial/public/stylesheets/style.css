@@ -1,9 +1,10 @@
 @media (max-height: 100px) {}
 body {
     padding-top: 70px;
-    margin-right: -1000px;
+    margin-right: 250px;
     margin-left: 250px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background: none;
 }
 
 a {
@@ -12,6 +13,8 @@ a {
 
 .panel_juegos > .panel-body {
     padding: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 0px;
 }
 .panel_juegos > .panel-body > img {
     width: 100%;
@@ -20,3 +23,10 @@ a {
 .panel_juegos > .panel-footer {
     text-align: center;
 }
+/*
+html {
+    background-image: url('http://wallpapercave.com/wp/UyNOzwq.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+*/
