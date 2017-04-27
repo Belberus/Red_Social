@@ -15,7 +15,6 @@ angular.module('APSocial',['ui.router']).config([
                 }
             })
 
-
             .state('community', {
                 url: '/community',
                 templateUrl: '/templates/community.html',
