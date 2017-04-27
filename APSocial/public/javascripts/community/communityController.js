@@ -4,6 +4,7 @@ angular.module('APSocial').controller('MainCtrl', [
         'auth',
         function($scope, posts, auth){
             $scope.posts = posts.posts;
+            $scope.name = posts.name;
             $scope.isLoggedIn = auth.isLoggedIn;
             $scope.isSameUser = auth.isSameUser;
 

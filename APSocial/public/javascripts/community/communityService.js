@@ -1,16 +1,22 @@
 angular.module('APSocial').factory('posts',['$http','auth', function($http,auth){
             var o =  {
+                name: "",
+                community: "",
                 posts: []
             };
 
-            o.getAll = function() {
-                return $http.get('/posts').success(function(data){
-                    angular.copy(data, o.posts);
+            o.getAll = function(id) {
+                o.community = id;
+                o.posts = [];
+                console.log(id);
+                return $http.get('community/'+id).success(function(data){
+                    o.name=data.name;
+                    angular.copy(data.posts, o.posts);
                 });
             };
 
             o.create = function(post) {
-                return $http.post('/posts', post, {
+                return $http.post('community/'+o.community+'/posts', post, {
                     headers: {Authorization: 'Bearer '+auth.getToken()}
                 }).success(function(data){
                     o.posts.push(data);
@@ -18,19 +24,19 @@ angular.module('APSocial').factory('posts',['$http','auth', function($http,auth)
             };
 
             o.addview = function(post) {
-                return $http.put('/posts/' + post._id +'/addview').success(function(data){
+                return $http.put('community/'+o.community+'/posts/' + post._id +'/addview').success(function(data){
                     post.views += 1;
                 });
             };
 
             o.get = function(id) {
-                return $http.get('/posts/' + id).then(function(res){
+                return $http.get('community/'+o.community+'/posts/' + id).then(function(res){
                     return res.data;
                 });
             };
 
             o.deletePost = function(post) {
-                return $http.delete('/posts/' + post._id, {
+                return $http.delete('community/'+o.community+'/posts/' + post._id, {
                     headers: {Authorization: 'Bearer '+auth.getToken()}
                 }).success(function() {
                     o.posts.splice(o.posts.indexOf(post),1);
@@ -38,13 +44,13 @@ angular.module('APSocial').factory('posts',['$http','auth', function($http,auth)
             }; 
 
             o.addComment = function(id, comment) {
-                return $http.post('/posts/'+ id + '/comments', comment, {
+                return $http.post('community/'+o.community+'/posts/'+ id + '/comments', comment, {
                     headers: {Authorization: 'Bearer '+auth.getToken()}
                 });
             };
 
             o.upvoteComment = function(post, comment) {
-                return $http.put('/posts/' + post._id + '/comments/' + comment._id + '/upvote', null, {
+                return $http.put('community/'+o.community+'/posts/' + post._id + '/comments/' + comment._id + '/upvote', null, {
                     headers: {Authorization: 'Bearer '+auth.getToken()}
                 }).success(function(data){
                     comment.upvotes += 1;
@@ -52,7 +58,7 @@ angular.module('APSocial').factory('posts',['$http','auth', function($http,auth)
             };
 
             o.deleteComment = function(post, comment) {
-                return $http.delete('/posts/' + post._id + '/comments/' + comment._id, {
+                return $http.delete('community/'+o.community+'/posts/' + post._id + '/comments/' + comment._id, {
                     headers: {Authorization: 'Bearer '+auth.getToken()}
                 }).success(function() {
                     post.comments.splice(post.comments.indexOf(comment),1);

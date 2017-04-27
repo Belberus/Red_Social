@@ -13,13 +13,15 @@
             <div ng-repeat="community in communities | orderBy: '-title'">
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                     <div class="panel panel-default panel_juegos" style="height: 442px">
-                        <div class="panel-body">
-                            <img class="img-responsive center-block" src="{{community.image}}" style="height: 325px">
+                        <div class="panel-body" >
+                            <a href="#/community/{{community._id}}"><img class="img-responsive center-block" src="{{community.image}}" style="height: 325px"></a>
                         </div>
                         <div class="panel-footer">
+
                             <div style="height: 50px;">
                                 <p style="font-size: 16px;">{{community.name}}</p>
                             </div>
+
                             <p>{{community.subs}}</p>
                             <a href="#" class="btn btn-primary ">Join</a>
                         </div>

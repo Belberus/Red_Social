@@ -3,7 +3,7 @@
 </head>
 <body>
 <div class="page-header">
-    <h1>Community 1 (Temporal)</h1>
+    <h1>{{name}}</h1>
 </div>
 
 <div class="panel panel-default" style="margin-right: -655px;">
@@ -22,7 +22,7 @@
                         {{post.title}}
                     </span>
                     <span ng-click="incrementViews(post)">
-                        <a href="#/posts/{{post._id}}">Comments</a>
+                        <a href="#/community/{{community}}/posts/{{post._id}}">Comments</a>
                     </span>
                 </span>
                     <div style="margin-left:15px;">

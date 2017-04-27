@@ -16,12 +16,12 @@ angular.module('APSocial',['ui.router']).config([
             })
 
             .state('community', {
-                url: '/community',
+                url: '/community/{community}',
                 templateUrl: '/templates/community.html',
                 controller: 'MainCtrl',
                 resolve: {
-                    postPromise: ['posts', function(posts){
-                        return posts.getAll();
+                    postPromise: ['$stateParams','posts', function($stateParams, posts){
+                        return posts.getAll($stateParams.community);
                     }]
 
                 }
@@ -33,7 +33,7 @@ angular.module('APSocial',['ui.router']).config([
                 controller: 'AuthCtrl',
                 onEnter: ['$state', 'auth', function($state, auth){
                     if(auth.isLoggedIn()){
-                        $state.go('community');
+                        $state.go('home');
                     }
                 }]
             })
@@ -44,13 +44,13 @@ angular.module('APSocial',['ui.router']).config([
                 controller: 'AuthCtrl',
                 onEnter: ['$state', 'auth', function($state, auth){
                     if(auth.isLoggedIn()){
-                        $state.go('community');
+                        $state.go('home');
                     }
                 }]
             })
 
             .state('posts', {
-                url: '/posts/{id}',
+                url: '/community/{community}/posts/{id}',
                 templateUrl: '/templates/posts.html',
                 controller: 'PostsCtrl',
                 resolve: {
@@ -60,6 +60,6 @@ angular.module('APSocial',['ui.router']).config([
                 }
             });
 
-            $urlRouterProvider.otherwise('community');
+            $urlRouterProvider.otherwise('home');
         }]);
 

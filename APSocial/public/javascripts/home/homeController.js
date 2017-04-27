@@ -9,6 +9,8 @@ angular.module('APSocial').controller('HomeCtrl', [
                         console.log(communities);    
                     };
 
+                    
+
                 }]);
 
 
