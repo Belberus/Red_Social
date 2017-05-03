@@ -59,8 +59,13 @@ router.put('/community/:community/sub',auth, function(req, res, next){
 
 router.delete('/community/:community/sub', auth, function(req, res, next){
     var community = req.community._id;
-    User.update({'username': req.payload.username}, {$pull: {communities: ObjectId("\""+community+"\"")}});
-    res.send("Desuscrito");
+    User.update({'username': req.payload.username}, {$pull: {communities: ObjectId("\""+community+"\"")}},function(err,affected){
+        if(err){return next(err);}
+        if(affected.nModified>0){req.community.decsub();}
+
+        res.send("Desuscrito");
+    });
+
 });
 
 //////////////////////////////////////////////////////
