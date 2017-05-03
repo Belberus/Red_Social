@@ -46,9 +46,9 @@ router.get('/mycommunities', auth, function(req, res, next){
 
 router.put('/community/:community/sub',auth, function(req, res, next){
     var communityid=req.community._id;
-    User.update({'username': req.payload.username}, {$addToSet: {communities: communityid}}, function(err,resul){
+    User.update({'username': req.payload.username}, {$addToSet: {communities: communityid}}, function(err,affected){
         if(err){return next(err);}
-
+        if(affected.nModified>0){req.community.addsub();}
         Community.findById(communityid,function(err, community){
             if(err){return next(err);}
 
@@ -59,7 +59,7 @@ router.put('/community/:community/sub',auth, function(req, res, next){
 
 router.delete('/community/:community/sub', auth, function(req, res, next){
     var community = req.community._id;
-    User.update({'username': req.payload.username}, {$pull: {communities: community}});
+    User.update({'username': req.payload.username}, {$pull: {communities: ObjectId("\""+community+"\"")}});
     res.send("Desuscrito");
 });
 

@@ -15,6 +15,17 @@ angular.module('APSocial',['ui.router']).config([
                 }
             })
 
+           /* state('mycommunities', {
+                url: '/mycommunities',
+                templateUrl: '/templates/mycommunities.html',
+                controller: 'myCtrl',
+                resolve: {
+                    mycom: ['myCommunities', function(myCommunities){
+                        return myCommunities.getUserCommunities();
+                    }]
+                }
+            })*/
+
             .state('community', {
                 url: '/community/{community}',
                 templateUrl: '/templates/community.html',
