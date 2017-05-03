@@ -9,7 +9,9 @@ angular.module('APSocial').controller('HomeCtrl', [
                         console.log(communities);    
                     };
 
-                    
+                    $scope.subscribe = function(community){
+                        communities.suscribe(community);
+                    };
 
                 }]);
 

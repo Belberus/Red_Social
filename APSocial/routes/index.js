@@ -10,6 +10,9 @@ var User = mongoose.model('User');
 var jwt = require('express-jwt');
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 
+////////
+//HOME//
+
 router.get('/home', function(req, res, next) {
     Community.find(function(err,communities){
         if(err){ return next(err);}
@@ -29,6 +32,39 @@ router.post('/home', function(req, res, next) {
         res.json(com);
     });
 });
+
+/////////////////
+//SUSCRIPCIONES//
+
+router.get('/mycommunities', auth, function(req, res, next){
+    req.user.populate('communities', function(err, user){
+        if(err){return next(err);}
+
+        res.json(user.communities);
+    });
+});
+
+router.put('/community/:community/sub',auth, function(req, res, next){
+    var communityid=req.community._id;
+    User.update({'username': req.payload.username}, {$addToSet: {communities: communityid}}, function(err,resul){
+        if(err){return next(err);}
+
+        Community.findById(communityid,function(err, community){
+            if(err){return next(err);}
+
+            res.json(community);
+        })
+    });
+});
+
+router.delete('/community/:community/sub', auth, function(req, res, next){
+    var community = req.community._id;
+    User.update({'username': req.payload.username}, {$pull: {communities: community}});
+    res.send("Desuscrito");
+});
+
+//////////////////////////////////////////////////////
+/////////////////Parametros///////////////////////////
 
 router.param('community', function(req, res, next, id) {
     var query = Community.findById(id);
@@ -64,6 +100,8 @@ router.param('comment', function(req, res, next, id) {
     });
 });
 
+///////////////////////////////////////////////////////////////////////
+
 router.get('/community/:community', function(req, res, next) {
     req.community.populate('posts', function(err, community) {
         if(err) {return next(err); }
@@ -71,6 +109,8 @@ router.get('/community/:community', function(req, res, next) {
         res.json(community);
     });
 });
+
+
 
 router.post('/community/:community/posts', auth, function(req,res,next) {
     var post = new Post(req.body);

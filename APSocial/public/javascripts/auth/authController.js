@@ -9,7 +9,7 @@ angular.module('APSocial').controller('AuthCtrl', [
                     auth.register($scope.user).error(function(error){
                         $scope.error = error;
                     }).then(function(){
-                        $state.go('community');
+                        $state.go('home');
                     });
                 };
 
@@ -17,7 +17,7 @@ angular.module('APSocial').controller('AuthCtrl', [
                     auth.logIn($scope.user).error(function(error){
                         $scope.error = error;
                     }).then(function(){
-                        $state.go('community');
+                        $state.go('home');
                     });
                 };
             }]);
