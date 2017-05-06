@@ -4,7 +4,8 @@ angular.module('APSocial').controller('HomeCtrl', [
                 'auth',
                 function($scope, communities, auth){
                     $scope.communities = communities.communities;
-                    
+                    $scope.mycommunities = communities.mycommunities;
+
                     $scope.shownames = function() {
                         console.log(communities);    
                     };
@@ -13,6 +14,15 @@ angular.module('APSocial').controller('HomeCtrl', [
                         communities.suscribe(community);
                     };
 
+                    $scope.isSubscribed = function(community){
+
+                        for (var i = 0; i < $scope.mycommunities.length; i++) {
+                            if (community.name == $scope.mycommunities[i].name) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
                 }]);
 
 

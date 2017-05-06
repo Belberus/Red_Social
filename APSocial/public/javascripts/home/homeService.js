@@ -20,7 +20,6 @@ angular.module('APSocial').factory('communities', ['$http','auth',function($http
         return $http.put('community/'+ community._id +'/sub', null, {
             headers: {Authorization: 'Bearer '+auth.getToken()}
         }).success(function(data){
-            console.log(data.subs);
             community.subs=data.subs;
         });
     };
