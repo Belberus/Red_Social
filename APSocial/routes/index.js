@@ -37,10 +37,13 @@ router.post('/home', function(req, res, next) {
 //SUSCRIPCIONES//
 
 router.get('/mycommunities', auth, function(req, res, next){
-    req.user.populate('communities', function(err, user){
-        if(err){return next(err);}
-
-        res.json(user.communities);
+    console.log("He entrado");
+    User.findOne({'username': req.payload.username},function(err,user){
+       user.populate('communities').populate('communities', function(err, user){
+           if(err){return next(err);}
+           console.log("Llego aqui");
+           res.json(user.communities);
+       });
     });
 });
 
@@ -48,12 +51,15 @@ router.put('/community/:community/sub',auth, function(req, res, next){
     var communityid=req.community._id;
     User.update({'username': req.payload.username}, {$addToSet: {communities: communityid}}, function(err,affected){
         if(err){return next(err);}
-        if(affected.nModified>0){req.community.addsub();}
-        Community.findById(communityid,function(err, community){
-            if(err){return next(err);}
-
-            res.json(community);
-        })
+        if(affected.nModified>0){
+            req.community.addsub(function(){
+                Community.findById(communityid,function(err, community){
+                    if(err){return next(err);}
+                    res.json(community);
+                    console.log(community);
+                })
+            });
+        }
     });
 });
 
