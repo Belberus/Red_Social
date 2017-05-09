@@ -14,6 +14,10 @@ angular.module('APSocial').controller('HomeCtrl', [
                         communities.suscribe(community);
                     };
 
+                    $scope.unSubscribe = function(community){
+                        communities.unSubscribe(community);
+                    }
+
                     $scope.isSubscribed = function(community){
 
                         for (var i = 0; i < $scope.mycommunities.length; i++) {

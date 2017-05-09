@@ -37,11 +37,9 @@ router.post('/home', function(req, res, next) {
 //SUSCRIPCIONES//
 
 router.get('/mycommunities', auth, function(req, res, next){
-    console.log("He entrado");
     User.findOne({'username': req.payload.username},function(err,user){
        user.populate('communities').populate('communities', function(err, user){
            if(err){return next(err);}
-           console.log("Llego aqui");
            res.json(user.communities);
        });
     });
@@ -56,22 +54,30 @@ router.put('/community/:community/sub',auth, function(req, res, next){
                 Community.findById(communityid,function(err, community){
                     if(err){return next(err);}
                     res.json(community);
-                    console.log(community);
                 })
             });
+        }
+        else{
+            res.send("Ya suscrito");
         }
     });
 });
 
 router.delete('/community/:community/sub', auth, function(req, res, next){
     var community = req.community._id;
-    User.update({'username': req.payload.username}, {$pull: {communities: ObjectId("\""+community+"\"")}},function(err,affected){
+    User.update({'username': req.payload.username}, {$pull: {communities: community}},function(err,affected){
         if(err){return next(err);}
-        if(affected.nModified>0){req.community.decsub();}
-
-        res.send("Desuscrito");
+        if(affected.nModified>0) {
+            req.community.decsub(function () {
+                Community.findById(community, function (err, community) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.json(community);
+                })
+            });
+        }
     });
-
 });
 
 //////////////////////////////////////////////////////

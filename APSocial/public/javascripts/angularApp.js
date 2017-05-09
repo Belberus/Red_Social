@@ -15,16 +15,18 @@ angular.module('APSocial',['ui.router']).config([
                 }
             })
 
-           /* state('mycommunities', {
+            //TODO: no resuelve las comunidades
+            .state('mycommunities', {
                 url: '/mycommunities',
                 templateUrl: '/templates/mycommunities.html',
-                controller: 'myCtrl',
+                controller: 'HomeCtrl',
                 resolve: {
-                    mycom: ['myCommunities', function(myCommunities){
-                        return myCommunities.getUserCommunities();
+                    mycoms: ['mycommunities', function(communities){
+
+                        return communities.getUserCommunities();
                     }]
                 }
-            })*/
+            })
 
             .state('community', {
                 url: '/community/{community}',
