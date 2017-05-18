@@ -13,6 +13,7 @@
         <script src="/javascripts/post/postController.js"></script>
         <script src="/javascripts/home/homeController.js"></script>
         <script src="/javascripts/home/homeService.js"></script>
+        <script src="/javascripts/myCommunities/myService.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script>
     </head>
 
@@ -32,7 +33,7 @@
                   <li><a style="font-size:20px; color: #FFFFFF;" href="#"><span class="glyphicon glyphicon-th"></span> Explore</a></li>
               </ul>
               <ul class="nav navbar-nav pull-left">
-                  <li ng-show="isLoggedIn()"><a style="font-size:20px; color: #FFFFFF;" href="#/mycommunities"><span class="glyphicon glyphicon-heart"></span> Subscriptions</a></li>
+                  <li ng-show="isLoggedIn()"><a style="font-size:20px; color: #FFFFFF;" href="/#/mycomms"><span class="glyphicon glyphicon-heart"></span> Subscriptions</a></li>
               </ul>
               <ul style="margin-right: 250px;" class="nav navbar-nav pull-right">
                   <li ng-show="isLoggedIn()"><a style="color: #FFFFFF;"><span class="glyphicon glyphicon-user"></span> {{ currentUser() }}</a></li>

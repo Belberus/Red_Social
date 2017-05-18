@@ -8,7 +8,6 @@ angular.module('APSocial').factory('posts',['$http','auth', function($http,auth)
             o.getAll = function(id) {
                 o.community = id;
                 o.posts = [];
-                console.log(id);
                 return $http.get('community/'+id).success(function(data){
                     o.name=data.name;
                     angular.copy(data.posts, o.posts);

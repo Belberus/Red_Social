@@ -11,6 +11,8 @@
                 <h2>Comunidades:</h2>
             </div>
             <!--TODO: Mejorar mensaje de suscripcion cuando el usuario no ha iniciado sesión-->
+            <!--TODO: Revisar suscribir y desuscribir, no funcionan correctamente, desuscriben juegos que no son el pulsado-->
+
             <div ng-repeat="community in communities | orderBy: '-title'">
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                     <div class="panel panel-default panel_juegos" style="height: 442px">
@@ -25,13 +27,13 @@
 
                             <p>{{community.subs}}</p>
 
-                            <span ng-show="isLoggedIn()" ng-if="isSubscribed(community)" ng-click="subscribe(community)">
+                            <span ng-show="isLoggedIn() && isSubscribed(community)" ng-click="subscribe(community)">
                                 <a class="btn btn-primary ">Subscribe</a>
                             </span>
-                            <span ng-show="isLoggedIn()" ng-if="!isSubscribed(community)" ng-click="unSubscribe(community)">
+                            <span ng-show="isLoggedIn() && !isSubscribed(community)" ng-click="unSubscribe(community)">
                                 <a class ="btn btn-warning "> Unsubscribe</a>
                             </span>
-                            <span ng-hide="isLoggedIn()" >
+                            <span ng-show="!isLoggedIn()">
                                 <p>Registrate para unirte</p>
                             </span>
                         </div>
