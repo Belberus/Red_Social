@@ -29,8 +29,12 @@ angular.module('APSocial').factory('communities', ['$http','auth',function($http
         return $http.delete('/community/'+ community._id +'/sub', {
             headers: {Authorization: 'Bearer '+auth.getToken()}
         }).success(function(data){
-            console.log(community);
-            c.mycommunities.splice(c.mycommunities.indexOf(community), 1);
+            for (var i = 0; i <c.mycommunities.length; i++) {
+                if (c.mycommunities[i].name == community.name) {
+                    c.mycommunities.splice(i, 1);
+                    break;
+                }
+            }
             community.subs=data.subs;
         });
     };

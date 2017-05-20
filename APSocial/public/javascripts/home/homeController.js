@@ -4,7 +4,7 @@ angular.module('APSocial').controller('HomeCtrl', [
                 'auth',
                 function($scope, communities, auth){
                     $scope.allCommunities = communities.communities;
-                    $scope.allMyCommunities = communities.communities;
+                    $scope.allMyCommunities = communities.mycommunities;
                     $scope.communities = communities.communities;
                     $scope.mycommunities = communities.mycommunities;
                     $scope.isLoggedIn = auth.isLoggedIn;
@@ -20,7 +20,6 @@ angular.module('APSocial').controller('HomeCtrl', [
                     };
 
                     $scope.unSubscribe = function(community){
-                        console.log(community);
                         communities.unSubscribe(community);
                         console.log($scope.mycommunities)
 
