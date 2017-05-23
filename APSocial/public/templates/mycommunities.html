@@ -12,6 +12,9 @@
             <div style="margin-top: -25px; margin-bottom: 25px;">
                 <h2>My communities:</h2>
             </div>
+            <div ng-hide="mycommunities.length > 0">
+                <h3>No estás suscrito a ninguna comunidad!</h3>
+            </div>
             <div ng-repeat="community in mycommunities | orderBy: '-title'">
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                     <div class="panel panel-default panel_juegos" style="height: 442px">

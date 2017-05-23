@@ -221,7 +221,7 @@ router.post('/login', function(req, res, next){
 
     })(req, res, next);
 });
-
+//TODO: TAMBIEN HAY QUE BORRAR LA REFERENCIA EN LA COMUNIDAD
 router.delete('/community/:community/posts/:post', auth, function(req, res, next){
     if(req.post.author != req.payload.username) {
         return res.status(401).json({message: 'Solo puede ser borrado por el creador.'});

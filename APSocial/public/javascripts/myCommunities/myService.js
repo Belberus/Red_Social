@@ -4,9 +4,10 @@ angular.module('APSocial').factory('myCommunities', ['$http','auth',function($ht
     };
 
     c.getUserCommunities = function() {
-        return $http.get('/mycommunities').success(function(data){
-            console.log(data)
-            //angular.copy(data, c.communities);
+        return $http.get('/mycommunities', {
+            headers: {Authorization: 'Bearer '+auth.getToken()}
+        }).success(function(data){
+            angular.copy(data, c.mycommunities);
         });
     };
 

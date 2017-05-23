@@ -21,9 +21,8 @@ angular.module('APSocial',['ui.router']).config([
                 templateUrl: '/templates/mycommunities.html',
                 controller: 'HomeCtrl',
                 resolve: {
-                    mycoms: ['mycommunities', function(communities){
-                        console.log("Estoy aqui");
-                        //return communities.getUserCommunities();
+                    mycoms: ['myCommunities', function(myCommunities){
+                        return myCommunities.getUserCommunities();
                     }]
                 }
             })
