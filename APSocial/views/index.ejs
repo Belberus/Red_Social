@@ -21,12 +21,12 @@
       <nav class="navbar navbar navbar-fixed-top" ng-controller="NavCtrl" style="background-image: url('http://wallpapercave.com/wp/UyNOzwq.jpg');">
           <div class="container-fluid">
               <div style="margin-left: 10px; margin-right: 250px;"class="navbar-header">
-                  <a style="margin-top: -10px; font-size: 35px; color: #FFFFFF;" class="navbar-brand" href="#"><span class = "glyphicon glyphicon-tower"></span>Gammit</a>
+                  <a style="margin-top: -10px; font-size: 35px; margin-left: 225px; color: #FFFFFF;" class="navbar-brand" href="#"><span class = "glyphicon glyphicon-tower"></span>Gammit</a>
               </div>
               <ul class="nav navbar-nav pull-left">
-                  <li ng-show="isLoggedIn()"><a style="font-size:20px; color: #FFFFFF;" href="/#/mycommunities"><span class="glyphicon glyphicon-heart"></span> Subscriptions</a></li>
+                  <li ng-show="isLoggedIn()"><a style="font-size:20px; color: #FFFFFF; margin-left: 50px;" href="/#/mycommunities"><span class="glyphicon glyphicon-heart"></span> Subscriptions</a></li>
               </ul>
-              <ul style="margin-right: 10px;" class="nav navbar-nav pull-right">
+              <ul style="margin-right: 250px;" class="nav navbar-nav pull-right">
                   <li ng-show="isLoggedIn()"><a style="color: #FFFFFF;"><span class="glyphicon glyphicon-user"></span> {{ currentUser() }}</a></li>
                   <li ng-show="isLoggedIn()"><a style="color: #FFFFFF;" href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
                   <li ng-show="isLoggedIn()"><a style="color: #FFFFFF;" href="" ng-click="logOut()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
